@@ -23,7 +23,7 @@ public class Category {
         inverseJoinColumns = @JoinColumn(name = "item_id")
     )
     private List<Item> items = new ArrayList<>();
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "parent_id")
     private Category parent;
     @OneToMany(mappedBy = "parent") // 셀프로 양방향 연관관계 셋팅
