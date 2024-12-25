@@ -2,6 +2,7 @@ package jpabook.jpashop.service;
 
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -10,9 +11,22 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
+@RequiredArgsConstructor // lombok 사용하는 걸 권장함.
 public class MemberService {
-    @Autowired
-    private MemberRepository memberRepository;
+//    @Autowired
+    private final MemberRepository memberRepository;
+
+//    @Autowired // Setter Injection (직접 주입할 수 있는 장점이 있음.)(치명적인 단점이 있음)
+//    public void setMemberRepository(MemberRepository memberRepository) {
+//        this.memberRepository = memberRepository;
+//    }
+
+     // 생성자 인젝션
+//    public MemberService(MemberRepository memberRepository){
+//        this.memberRepository = memberRepository;
+//    }
+
+
 
     /**
     *  회원 가입
