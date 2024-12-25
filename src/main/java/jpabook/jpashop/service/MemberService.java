@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.List;
 
 @Service
-@Transactional
+@Transactional(readOnly = true)
 public class MemberService {
     @Autowired
     private MemberRepository memberRepository;
@@ -17,6 +17,7 @@ public class MemberService {
     /**
     *  회원 가입
     * */
+    @Transactional // 기본 false
     public Long join(Member member){
         validateDuplicateMember(member); // 중복 회원 검증
         memberRepository.save(member);
