@@ -11,7 +11,7 @@ import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
-@RequiredArgsConstructor // lombok 사용하는 걸 권장함.
+//@RequiredArgsConstructor // lombok 사용하는 걸 권장함.
 public class MemberService {
 //    @Autowired
     private final MemberRepository memberRepository;
@@ -22,9 +22,9 @@ public class MemberService {
 //    }
 
      // 생성자 인젝션
-//    public MemberService(MemberRepository memberRepository){
-//        this.memberRepository = memberRepository;
-//    }
+    public MemberService(MemberRepository memberRepository){
+        this.memberRepository = memberRepository;
+    }
 
 
 
