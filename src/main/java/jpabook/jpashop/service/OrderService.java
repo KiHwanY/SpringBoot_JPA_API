@@ -18,10 +18,9 @@ import org.springframework.transaction.annotation.Transactional;
 public class OrderService {
 
     private final OrderRepository orderRepository;
-
     private final MemberRepository memberRepository;
-
     private final ItemRepository itemRepository;
+
     /**
     * 주문
     * */
@@ -45,8 +44,8 @@ public class OrderService {
         orderRepository.save(order);
 
         return order.getId();
-
     }
+
     /**
     *  취소
     * */
