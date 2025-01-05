@@ -1,6 +1,7 @@
 package jpabook.jpashop.service;
 
 import jpabook.jpashop.repository.OrderRepository;
+import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -18,4 +19,30 @@ public class OrderServiceTest {
     @Autowired
     private OrderRepository orderRepository;
 
+    @Test
+    public void 상품주문 () throws Exception{
+        //given
+
+        //when
+
+        //then
+    }
+
+    @Test
+    public void 주문취소 () throws Exception{
+        //given
+
+        //when
+
+        //then
+    }
+
+    @Test
+    public void 상품주문_재고수량초과 () throws Exception{
+        //given
+
+        //when
+
+        //then
+    }
 }
