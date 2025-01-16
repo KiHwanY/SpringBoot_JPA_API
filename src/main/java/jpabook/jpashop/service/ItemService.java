@@ -20,15 +20,16 @@ public class ItemService {
         itemRepository.save(item);
     }
 
+    //변경감지로 명확하게 업데이트 처리 해주자.
+    //이 방식을 선호한다.
     @Transactional //트랜잭션으로 인해 커밋이 된다.
-    public void updateItem(Long itemId, Book param){
+    public void updateItem(Long itemId, int price, String name, int stockQuantity){
         //영속 상태
         Item findItem = itemRepository.findOne(itemId);
 
-
-        findItem.setPrice(param.getPrice());
-        findItem.setName(param.getName());
-        findItem.setStockQuantity(findItem.getStockQuantity());
+        findItem.setPrice(price);
+        findItem.setName(name);
+        findItem.setStockQuantity(stockQuantity);
     }
 
     public List<Item> findItems(){

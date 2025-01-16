@@ -63,20 +63,19 @@ public class ItemController {
 
         return "items/updateItemForm";
     }
-
+    //어설프게 엔티티를 파라미터로 쓰지 말자.
     @PostMapping("items/{itemId}/edit")
-    public String updateItem(@ModelAttribute("form") BookForm form){
+    public String updateItem(@PathVariable Long itemId,@ModelAttribute("form") BookForm form){
 
-        Book book = new Book();
-        book.setId(form.getId());
-        book.setName(form.getName());
-        book.setPrice(form.getPrice());
-        book.setStockQuantity(form.getStockQuantity());
-        book.setAuthor(form.getAuthor());
-        book.setIsbn(form.getIsbn());
-
-        itemService.saveItem(book);
-
+//        Book book = new Book();
+//        book.setId(form.getId());
+//        book.setName(form.getName());
+//        book.setPrice(form.getPrice());
+//        book.setStockQuantity(form.getStockQuantity());
+//        book.setAuthor(form.getAuthor());
+//        book.setIsbn(form.getIsbn());
+//        itemService.saveItem(book);
+         itemService.updateItem(itemId, form.getPrice(),form.getName(), form.getStockQuantity());
         return "redirect:/items";
     }
 }
