@@ -27,13 +27,6 @@ public class OrderRepository {
     }
 
     public List<Order> findAllByString(OrderSearch orderSearch){
-//        return em.createQuery("select o from Order o join o.member m" +
-//                        " where o.status = :status " +
-//                        " and m.name like :name", Order.class)
-//                .setParameter("status",orderSearch.getOrderStatus())
-//                .setParameter("name",orderSearch.getMemberName())
-//                .setMaxResults(1000)
-//                .getResultList();
 
         String jpql = "select o from Order o join o.member m";
         boolean isFirstCondition = true;
