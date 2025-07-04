@@ -8,11 +8,45 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @RestController
 @RequiredArgsConstructor
 public class MemberApiController {
 
     private final MemberService memberService;
+
+    //회원 전체 정보를 가져와서 orders 까지 다 가져온다.
+    //회원 정보만 가져와야 한다.
+    @GetMapping("/api/v1/members")
+    public List<Member> memberV1() {
+        return memberService.findMembers();
+    }
+
+    @GetMapping("/api/v2/members")
+    public Result memberV2(){
+        List<Member> findMembers = memberService.findMembers();
+        List<MemberDto> collect = findMembers.stream()
+                .map(m -> new MemberDto(m.getName()))
+                .collect(Collectors.toList());
+
+        return new Result(collect.size(), collect);
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class Result<T> {
+        private int count;
+        private T data;
+    }
+
+    @Data
+    @AllArgsConstructor
+    static class MemberDto{
+        private String name;
+    }
+
 
     //클래스를 별도로 생성안해도 된다.
     //잘못하면 같이 망할 수 있는 로직이다.
@@ -41,8 +75,9 @@ public class MemberApiController {
 
         memberService.update(id,request.getName());
         Member findMember = memberService.findOne(id);
-        
+
         return new UpdateMemberResponse(findMember.getId(),findMember.getName());
+
     }
 
     @Data
