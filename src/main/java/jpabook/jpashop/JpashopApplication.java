@@ -16,6 +16,10 @@ public class JpashopApplication {
 
 		SpringApplication.run(JpashopApplication.class, args);
 	}
+	/**
+	 * 참고: 앞에서 계족 강조했듯이 정말 간단한 애플리케이션이 아니면 엔티티를 API 응답으로 외부로 노출하는 것은 좋지 않다.
+	 *  따라서 Hibernate5JakartaModule 을 사용하기 보다는 DTO로 변환해서 반환하는 것이 더 좋은 방법이다.
+	 * * */
 
 	@Bean
 	Hibernate5JakartaModule hibernate5JakartaModule(){
