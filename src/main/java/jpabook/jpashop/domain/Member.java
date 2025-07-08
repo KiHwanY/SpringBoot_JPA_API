@@ -24,7 +24,7 @@ public class Member {
     @Embedded // 내장 타입
     private Address address;
 
-
+    @JsonIgnore
     @OneToMany(mappedBy = "member") // 연관관계 주인 설정 -> FK
     private List<Order> orders = new ArrayList<>();
 
