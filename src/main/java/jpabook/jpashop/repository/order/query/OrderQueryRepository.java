@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.groupingBy;
+
 @Repository
 @RequiredArgsConstructor
 public class OrderQueryRepository {
@@ -91,18 +93,22 @@ public class OrderQueryRepository {
                 .setParameter("orderIds", orderIds)
                 .getResultList();
 
-        return orderItems.stream()
-                .collect(Collectors.groupingBy(OrderItemQueryDto::getOrderId));
+        Map<Long, List<OrderItemQueryDto>> collect = orderItems.stream()
+                .collect(groupingBy(OrderItemQueryDto::getOrderId));
+
+        return collect;
     }
 
     public List<OrderFlatDto> findAllByDto_flat() {
-        return em.createQuery(
-                "select new jpabook.jpashop.repository.order.query.OrderFlatDto(o.id, m.name, o.orderDate, o.status, d.address, i.name, oi.orderPrice, oi.count)" +
-                        " from Order o" +
-                        " join o.member m" +
-                        " join o.delivery d" +
-                        " join o.orderItems oi" +
-                        " join oi.item i", OrderFlatDto.class)
+        List<OrderFlatDto> resultList = em.createQuery(
+                        "select new jpabook.jpashop.repository.order.query.OrderFlatDto(o.id, m.name, o.orderDate, o.status, d.address, i.name, oi.orderPrice, oi.count)" +
+                                " from Order o" +
+                                " join o.member m" +
+                                " join o.delivery d" +
+                                " join o.orderItems oi" +
+                                " join oi.item i", OrderFlatDto.class)
                 .getResultList();
+
+        return resultList;
     }
 }
